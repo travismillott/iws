@@ -6,43 +6,58 @@
       <link rel="stylesheet" href="http://cdn.jtsage.com/jtsage-datebox/latest/jtsage-datebox.jqm.min.css" />
       <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
       <script>
-          //Fix for security error with jquery mobile: http://stackoverflow.com/questions/32453806/uncaught-securityerror-failed-to-execute-replacestate-on-history-cannot-be
-          $(document).bind('mobileinit',function(){
-              $.mobile.changePage.defaults.changeHash = false;
-              $.mobile.hashListeningEnabled = false;
-              $.mobile.pushStateEnabled = false;
-          });
-      </script> 
-      <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
-      <script src="http://cdn.jtsage.com/jtsage-datebox/latest/jtsage-datebox.jqm.min.js"></script>
-      <script>
-function calendarDisplayWhenInputClicked(){
+//Fix for security error with jquery mobile: http://stackoverflow.com/questions/32453806/uncaught-securityerror-failed-to-execute-replacestate-on-history-cannot-be
+$(document).bind('mobileinit',function(){
+  $.mobile.changePage.defaults.changeHash = false;
+  $.mobile.hashListeningEnabled = false;
+  $.mobile.pushStateEnabled = false;
+});
+
+
+function displayCalendarWhenInputFieldClicked(){
   $('div#calpicker input').on('click', function(){$('div#calpicker a').click()});
 }
 
 $(document).on('pageinit', function() {
-calendarDisplayWhenInputClicked();
+  displayCalendarWhenInputFieldClicked();
 });
-      </script>
+
+      </script> 
+      <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+      <script src="http://cdn.jtsage.com/jtsage-datebox/latest/jtsage-datebox.jqm.min.js"></script>
+       <style type="text/css">
+.ui-body-a {
+  border-style: none !important;
+}
+.ui-column{
+  float:left;
+  width:33%
+}
+.ui-last-column{
+  float:left;
+  width:34%
+}
+      </style>
     </head>
     <body>
-      <form>
-
+      <form method="POST">
+<div>
 <div class="ui-bar ui-bar-a"> <h1>Feature Request</h1> </div> <div class="ui-body ui-body-a">
 
 <ul data-role="listview" data-inset="true">
 
 <div class="ui-bar ui-bar-a"> <h3>Title</h3> </div> <div class="ui-body ui-body-a">
-<input type="text" name="text-1" id="text-1" value="" placeholder="A short, descriptive name of the feature request">
+<input type="text" name="title" value="" placeholder="A short, descriptive name of the feature request">
 </div>
 
 <div class="ui-bar ui-bar-a"> <h3>Description</h3> </div> <div class="ui-body ui-body-a">
-<textarea name="textarea-1" id="textarea-1" placeholder="A long description of the feature request"></textarea>
+  <textarea name="description" placeholder="A long description of the feature request"></textarea>
 </div>
 
+<div class="ui-column">
 <div class="ui-bar ui-bar-a"> <h3>Client</h3> </div> <div class="ui-body ui-body-a">
 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-  <select name="select-native-14" id="select-native-14">
+  <select name="client" >
     <option value="#">Choose Client</option>
     <option value="Client A">Client A</option>
     <option value="Client B">Client B</option>
@@ -51,23 +66,26 @@ calendarDisplayWhenInputClicked();
 </fieldset>
 </div>
 
-<div class="ui-bar ui-bar-a"> <h3>Priority</h3> </div> <div class="ui-body ui-body-a">
-  <input type="number" data-clear-btn="false" pattern="[0-9]*" name="number-1" id="number-1" value="" placeholder="1 = highest priority">
 </div>
 
-<div class="ui-bar ui-bar-a"> <h3>Target Date</h3> </div> <div id="calpicker" class="ui-body ui-body-a">
-<input type="text" data-role="datebox" data-datebox-mode="calbox" placeholder="Click for calendar">
+<div class="ui-column">
+<div class="ui-bar ui-bar-a"> <h3>Priority</h3> </div> 
+<div class="ui-body ui-body-a" > <input type="number" data-clear-btn="false" pattern="[0-9]*" name="priority" value="" placeholder="1 = highest priority"> </div>
 </div>
 
+<div class="ui-last-column">
+<div class="ui-bar ui-bar-a"> <h3>Target Date</h3> </div> <div class="ui-body ui-body-a">
+  <input type="text" name="date" data-role="datebox" data-datebox-mode="calbox" placeholder="Click for calendar">
+</div>
+</div>
 
 <div class="ui-bar ui-bar-a"> <h3>Ticket URL</h3> </div> <div class="ui-body ui-body-a">
-<input type="text" name="text-1" id="text-1" value="" placeholder="http://myticketurl.com/">
+  <input type="text" name="ticketurl" value="" placeholder="http://myticketurl.com/">
 </div>
 
 <div class="ui-bar ui-bar-a"> <h3>Product Area</h3> </div> <div class="ui-body ui-body-a">
 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-  <label for="select-native-14">Select A</label>
-  <select name="select-native-14" id="select-native-14">
+  <select name="productArea" >
     <option value="#">Choose Product Area</option>
     <option value='Policies'>Policies</option>
     <option value='Billing'>Billing</option>
@@ -76,11 +94,13 @@ calendarDisplayWhenInputClicked();
   </select>
 </fieldset>
 </div>
+<input type="submit" value="Create Feature Request" />
 
 
 
 
 </ul>
+</div>
 </div>
       </form>
     </body>
