@@ -6,6 +6,8 @@ from twisted.web.server import Site
 from twisted.web.resource import Resource
 from twisted.internet import reactor
 
+import utils
+
 with open('index.html','r') as f:
   INDEX_HTML = f.read()
 
@@ -23,11 +25,14 @@ class FormPage(Resource):
         return INDEX_HTML
 
     def render_POST(self, request):
+        utils.insertFeatureRequest(request.args)
+        print utils.fetchAllFeatureRequests()
         return '<html><body>You submitted: %s</body></html>' % (cgi.escape(str(request.args)),)
 
 
 if __name__ == "__main__":
   args = parseArgs()
+
   root = Resource()
   root.putChild("", FormPage())
   factory = Site(root)

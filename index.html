@@ -58,7 +58,7 @@ $(document).on('pageinit', function() {
 <div class="ui-bar ui-bar-a"> <h3>Client</h3> </div> <div class="ui-body ui-body-a">
 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
   <select name="client" >
-    <option value="#">Choose Client</option>
+    <option value="">Choose Client</option>
     <option value="Client A">Client A</option>
     <option value="Client B">Client B</option>
     <option value="Client C">Client C</option>
@@ -74,19 +74,19 @@ $(document).on('pageinit', function() {
 </div>
 
 <div class="ui-last-column">
-<div class="ui-bar ui-bar-a"> <h3>Target Date</h3> </div> <div class="ui-body ui-body-a">
-  <input type="text" name="date" data-role="datebox" data-datebox-mode="calbox" placeholder="Click for calendar">
+<div class="ui-bar ui-bar-a"> <h3>Target Date</h3> </div> <div class="ui-body ui-body-a" id='calpicker'>
+  <input type="text" name="target_date" data-role="datebox" data-datebox-mode="calbox" placeholder="Pick a date">
 </div>
 </div>
 
 <div class="ui-bar ui-bar-a"> <h3>Ticket URL</h3> </div> <div class="ui-body ui-body-a">
-  <input type="text" name="ticketurl" value="" placeholder="http://myticketurl.com/">
+  <input type="text" name="ticket_url" value="" placeholder="http://myticketurl.com/">
 </div>
 
 <div class="ui-bar ui-bar-a"> <h3>Product Area</h3> </div> <div class="ui-body ui-body-a">
 <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
-  <select name="productArea" >
-    <option value="#">Choose Product Area</option>
+  <select name="product_area" >
+    <option value="">Choose Product Area</option>
     <option value='Policies'>Policies</option>
     <option value='Billing'>Billing</option>
     <option value='Claims'>Claims</option>
