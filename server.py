@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 
-import tornado.httpserver
-import tornado.ioloop
-import tornado.web
-import logging
+import cgi
 import argparse
+from twisted.web.server import Site
+from twisted.web.resource import Resource
+from twisted.internet import reactor
 
 def parseArgs():
     parser = argparse.ArgumentParser(description='IWS Project Server')
@@ -12,22 +12,9 @@ def parseArgs():
                         help="Port for incoming http connections")
     return parser.parse_args()
 
-
-class TestHandler(tornado.web.RequestHandler):
-
-    def get(self, *args, **kwargs):
-
-        self.write('bbbbbq')
-
-
-from twisted.web.server import Site
-from twisted.web.resource import Resource
-from twisted.internet import reactor
-
-import cgi
-
 with open('index.html','r') as f:
   INDEX_HTML = f.read()
+
 
 class FormPage(Resource):
     def render_GET(self, request):
