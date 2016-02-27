@@ -6,14 +6,16 @@ from twisted.web.server import Site
 from twisted.web.resource import Resource
 from twisted.internet import reactor
 
+with open('index.html','r') as f:
+  INDEX_HTML = f.read()
+
+
 def parseArgs():
     parser = argparse.ArgumentParser(description='IWS Project Server')
     parser.add_argument('-p', '--port', default='80', type=int,
                         help="Port for incoming http connections")
     return parser.parse_args()
 
-with open('index.html','r') as f:
-  INDEX_HTML = f.read()
 
 
 class FormPage(Resource):
