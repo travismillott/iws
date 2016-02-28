@@ -4,10 +4,11 @@ NGINX_CONF_DIR=PATH_TO_NGINX_CONF
 MAIN_FOLDER=PATH_TO_STATIC_FILES
 
 
+
 ESCAPED_MAIN_FOLDER="${MAIN_FOLDER//\//\\/}"
 source ~/.iws/bin/activate
 
-function deploy_production_static_files{
+function deploy_production_static_files {
   sudo cp css/main.css /var/www/css/
   sudo cp js/main.js /var/www/js/
 }
