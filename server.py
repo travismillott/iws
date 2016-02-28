@@ -40,7 +40,7 @@ class FormPage(Resource):
 
     def render_POST(self, request):
         utils.insertFeatureRequest(request.args)
-        return redirectTo("http://localhost:8880/", request)
+        return redirectTo("/", request)
 
 
 

@@ -4,7 +4,8 @@ import settings
 import cgi
 
 
-TABLE_COLUMNS = ['title', 'description', 'client', 'priority', 'target_date', 'ticket_url', 'product_area']
+INSERT_COLUMNS = ['title', 'description', 'client', 'priority', 'target_date', 'ticket_url', 'product_area']
+DISPLAYED_COLUMNS = INSERT_COLUMNS + ['created']
 DB_CONNECTION_STRING = "dbname='iws' user='{user}' password='{password}'".format(password=settings.DB_PASSWORD, user=settings.DB_USER)
 
 
@@ -12,7 +13,7 @@ def getDataRowsHTML(data):
   htmlData = ''
   for row in data:
     htmlData += '<tr>\n'
-    for index, col in enumerate(TABLE_COLUMNS):
+    for index, col in enumerate(DISPLAYED_COLUMNS):
       if not row[index] :
         htmlData += '<td></td>'
         continue
@@ -27,7 +28,7 @@ def createFeatureRequestTable():
 
 <div class="ui-bar ui-bar-a"> <h1>Feature Request</h1> </div> <div class="ui-body ui-body-a">
     <div style="width:30%"><a href="new_feature" data-ajax="false" data-role="button">New Feature Request</a></div>
-    <table id="example" class="display" cellspacing="0" width="100%">
+    <table id="datatable" class="display" cellspacing="0" width="100%">
         <thead>
             <tr><th>{colNames}</th>
             </tr>
@@ -41,7 +42,7 @@ def createFeatureRequestTable():
         </tbody>
     </table>
 </div>
-'''.format(colNames = "</th><th>".join(TABLE_COLUMNS),
+'''.format(colNames = "</th><th>".join(DISPLAYED_COLUMNS),
            data=getDataRowsHTML(data))
 
 
@@ -65,14 +66,14 @@ def fetchResults(query, arg):
 
 
 def fetchAllFeatureRequests():
-  return fetchResults("""SELECT * FROM feature_requests""",())
+  return fetchResults("""SELECT {cols} FROM feature_requests ORDER BY priority ASC, created DESC""".format(cols=','.join(DISPLAYED_COLUMNS)),())
 
 def insertFeatureRequest(request_args):
   arg = lambda x : request_args.get(x)[0]
   runQuery("""INSERT INTO feature_requests ({target_columns}) 
-                     VALUES ({vals});""".format(target_columns=','.join(TABLE_COLUMNS),
-                                                vals          =','.join('%s' for i in range(len(TABLE_COLUMNS)))),
-                       tuple(arg(col) for col in TABLE_COLUMNS)
+                     VALUES ({vals});""".format(target_columns=','.join(INSERT_COLUMNS),
+                                                vals          =','.join('%s' for i in range(len(INSERT_COLUMNS)))),
+                       tuple(arg(col) for col in INSERT_COLUMNS)
           )
 
 

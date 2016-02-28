@@ -9,4 +9,6 @@
   float:left;
   width:34%
 }
-
+div.ui-slider{
+  padding-top: 8px !important;
+}
