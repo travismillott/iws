@@ -53,6 +53,10 @@ Give permissions to the database user defined in settings.py
   GRANT ALL ON feature_requests TO USER;
 
 
+Edit the restart server script's variables:
+
+MAIN_FOLDER and NGINX_CONF_DIR with the directories of the main folder and the folder the nginx.conf file is in
+
 Run server with 
 
   python PATHTOSERVER/server.py -p PORT &
