@@ -1,7 +1,10 @@
 # Feature Request App
  A small ticket system by Travis Millott
- 
- ### Setup
+
+## Setup
+
+
+##### Clone this repo on a production machine, cd into that dir.
 
 #### Create a virtualenv for python:
 
@@ -17,7 +20,12 @@
   `pip install psycopg2`
 
 
-##### Update the settings.py file with the correct database user/pass
+##### Setup Settings
+###### Edit the restartServer.sh script's variables:
+
+`MAIN_FOLDER` and `NGINX_CONF_DIR` with the directories of the main folder and the folder the nginx.conf file is in
+
+###### Update the settings.py file with the database user/pass
 
 
 #### Install postgresql
@@ -74,11 +82,8 @@ local   all             all                                     trust
   ```
   
 
-#### Edit the restartServer.sh script's variables:
 
-`MAIN_FOLDER` and `NGINX_CONF_DIR` with the directories of the main folder and the folder the nginx.conf file is in
-
-### Run server with 
+## Run server with 
 ```
   sh restartServer.sh
 ```
