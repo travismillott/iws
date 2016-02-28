@@ -25,6 +25,8 @@
 
 `MAIN_FOLDER` and `NGINX_CONF_DIR` with the directories of the static files folder (probably /var/www/) and the folder the nginx.conf file is in
 
+Make sure the static files folder has a `js` and `css` director, as the restart script will copy files to those folders.
+
 ###### Update the settings.py file with the database user/pass
 
 
