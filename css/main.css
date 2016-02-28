@@ -1,0 +1,12 @@
+.ui-body-a {
+  border-style: none !important;
+}
+.ui-column{
+  float:left;
+  width:33%
+}
+.ui-last-column{
+  float:left;
+  width:34%
+}
+

@@ -4,40 +4,11 @@
     <head>
       <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
       <link rel="stylesheet" href="http://cdn.jtsage.com/jtsage-datebox/latest/jtsage-datebox.jqm.min.css" />
+      <link rel="stylesheet" href="main.css" />
       <script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
-      <script>
-//Fix for security error with jquery mobile: http://stackoverflow.com/questions/32453806/uncaught-securityerror-failed-to-execute-replacestate-on-history-cannot-be
-$(document).bind('mobileinit',function(){
-  $.mobile.changePage.defaults.changeHash = false;
-  $.mobile.hashListeningEnabled = false;
-  $.mobile.pushStateEnabled = false;
-});
-
-
-function displayCalendarWhenInputFieldClicked(){
-  $('div#calpicker input').on('click', function(){$('div#calpicker a').click()});
-}
-
-$(document).on('pageinit', function() {
-  displayCalendarWhenInputFieldClicked();
-});
-
-      </script> 
+      <script src="main.js"></script>
       <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
       <script src="http://cdn.jtsage.com/jtsage-datebox/latest/jtsage-datebox.jqm.min.js"></script>
-       <style type="text/css">
-.ui-body-a {
-  border-style: none !important;
-}
-.ui-column{
-  float:left;
-  width:33%
-}
-.ui-last-column{
-  float:left;
-  width:34%
-}
-      </style>
     </head>
     <body>
       <form method="POST">
