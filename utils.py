@@ -1,8 +1,48 @@
 
-
 import psycopg2
 import settings
+import cgi
+
+
+TABLE_COLUMNS = ['title', 'description', 'client', 'priority', 'target_date', 'ticket_url', 'product_area']
 DB_CONNECTION_STRING = "dbname='iws' user='{user}' password='{password}'".format(password=settings.DB_PASSWORD, user=settings.DB_USER)
+
+
+def getDataRowsHTML(data):
+  htmlData = ''
+  for row in data:
+    htmlData += '<tr>\n'
+    for index, col in enumerate(TABLE_COLUMNS):
+      if not row[index] :
+        htmlData += '<td></td>'
+        continue
+      htmlData += '<td>{val}</td>'.format(val=cgi.escape(str(row[index])))
+    htmlData += '</tr>\n'
+  return htmlData
+
+
+def createFeatureRequestTable():
+  data = fetchAllFeatureRequests()
+  return '''
+
+<div class="ui-bar ui-bar-a"> <h1>Feature Request</h1> </div> <div class="ui-body ui-body-a">
+    <div style="width:30%"><a href="new_feature" data-ajax="false" data-role="button">New Feature Request</a></div>
+    <table id="example" class="display" cellspacing="0" width="100%">
+        <thead>
+            <tr><th>{colNames}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr><th>{colNames}</th>
+            </tr>
+        </tfoot>
+        <tbody>
+          {data}
+        </tbody>
+    </table>
+</div>
+'''.format(colNames = "</th><th>".join(TABLE_COLUMNS),
+           data=getDataRowsHTML(data))
 
 
 def runQuery(query, arg):
@@ -29,11 +69,10 @@ def fetchAllFeatureRequests():
 
 def insertFeatureRequest(request_args):
   arg = lambda x : request_args.get(x)[0]
-  columns = ['title', 'description', 'client', 'priority', 'target_date', 'ticket_url', 'product_area']
   runQuery("""INSERT INTO feature_requests ({target_columns}) 
-                     VALUES ({vals});""".format(target_columns=','.join(columns),
-                                                vals          =','.join('%s' for i in range(len(columns)))),
-                       tuple(arg(col) for col in columns)
+                     VALUES ({vals});""".format(target_columns=','.join(TABLE_COLUMNS),
+                                                vals          =','.join('%s' for i in range(len(TABLE_COLUMNS)))),
+                       tuple(arg(col) for col in TABLE_COLUMNS)
           )
 
 

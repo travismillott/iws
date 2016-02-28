@@ -12,6 +12,5 @@ function displayCalendarWhenInputFieldClicked(){
 
 $(document).on('pageinit', function() {
   displayCalendarWhenInputFieldClicked();
+  $('#example').DataTable();
 });
-
-
