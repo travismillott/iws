@@ -12,3 +12,16 @@
 div.ui-slider{
   padding-top: 8px !important;
 }
+.ui-title{
+  background-color: #4fafc2;
+}
+h1{
+  color: #FFFFFF;
+  text-shadow: 2px 2px #000000;
+}
+.ui-input-btn, a.ui-btn{
+  background-color: #5d9dd0 !important;
+  color: #FFFFFF !important;
+  text-shadow: 2px 2px #000000 !important;
+}
+

@@ -36,12 +36,15 @@ class FeatureOverview(Resource):
 
 class FormPage(Resource):
     def render_GET(self, request):
-        return INDEX_HTML.format(body=FORM_HTML)
+        return INDEX_HTML.format(body=FORM_HTML.format(validationMsg=''))
 
     def render_POST(self, request):
-        utils.insertFeatureRequest(request.args)
-        return redirectTo("/", request)
+        validDict = utils.validateRequiredColumns(request.args)
+        if utils.allArgsValid(validDict):
+          utils.insertFeatureRequest(request.args)
+          return redirectTo("/", request)
 
+        return INDEX_HTML.format(body=FORM_HTML.format(validationMsg='<div style="color:red">Please fill in all fields</div>'))
 
 
 if __name__ == "__main__":

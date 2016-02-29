@@ -12,7 +12,29 @@ function displayCalendarWhenInputFieldClicked(){
 
 $(document).on('pageinit', function() {
   displayCalendarWhenInputFieldClicked();
+  $("td.turnEpochIntoDate").each(function(i,ele){ele.innerHTML = setDateFromEpoch(parseInt(ele.innerHTML))})
   $('#datatable').DataTable( {
     order: []
   } );
 });
+
+var monthNames = [
+  "Jan", "Feb", "Mar",
+  "Apr", "May", "Jun", "Jul",
+  "Aug", "Sep", "Oct",
+  "Nov", "Dec"
+];
+
+function padZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+function setDateFromEpoch(epoch){
+  var d = new Date(0); 
+  d.setUTCSeconds(epoch);
+  return monthNames[d.getMonth()] +' ' + d.getDate() + ' ' + d.getFullYear() + ' ' + padZero(d.getHours()) + ':' + padZero(d.getMinutes());
+}
+
